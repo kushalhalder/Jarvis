@@ -61,7 +61,7 @@ slack.on('message', function(message) {
 	    text = message.text;
 
 	console.log('Received: %s %s %s %s "%s"', type, (channel.is_channel ? '#' : '') + channel.name, user ? "@"+user.name : '', time, text);
-	
+
 	if(type === "message")
 		if(text)
 		{
@@ -81,7 +81,7 @@ slack.on('message', function(message) {
 
 			});*/
 			//var s = sentiment(text)
-			
+
 			/*if(channel.is_channel) {
 				channelController.updateChannel(message.channel, channel.name)
 				messageController.save(text, message.channel, message.user, s)
@@ -119,10 +119,10 @@ rl.on('line', function(line) {
 				channel = slack.getChannelGroupOrDMByName(name[0]);
 				if (!channel) {
 					console.log("Could not find channel '%s'", name[0]);
-				} 
+				}
 				else if (!text) {
 					console.log("Need something to send!");
-				} 
+				}
 				else {
 					console.log("Sending '%s' to '%s'", text, name[0]);
 					channel.send(text);
@@ -142,7 +142,7 @@ rl.on('line', function(line) {
 					slack.joinChannel(rest);
 				else
 					console.log("This channel does not exist.")
-			} 
+			}
 			else {
 				console.log("Need a channel name to join");
 			}
@@ -152,11 +152,11 @@ rl.on('line', function(line) {
 				channel = slack.getChannelGroupOrDMByName(rest);
 				if (!channel) {
 					console.log("Could not find channel '%s'", rest);
-				} 
+				}
 				else {
 					channel.leave();
 				}
-			} 
+			}
 			else {
 				console.log("Need a channel name to leave");
 			}
@@ -193,7 +193,7 @@ function recognizeMessage(message)
 			if(m[2] == "@U039RTUTQ")
 				return ["mentionJarvis"];
 
-	var re = /\<\@\b(.*)\>/; 
+	var re = /\<\@\b(.*)\>/;
 	var m = message.match(re);
 
 	if(m)
@@ -246,7 +246,7 @@ function recognizeMessage(message)
 
 	if(reply)
 		switch (reply[0]) {
-			case "mention": 
+			case "mention":
 				var mentionedUser = slack.getUserByID(reply[1])
 				if(mentionedUser)
 					if(mentionedUser.name === "kushalder" && mentionedUser.presence == "away")
@@ -287,7 +287,7 @@ function recognizeMessage(message)
 				}
 				break;
 			case "stagingBranchRequest":
-				
+
 				break;
 		}
 

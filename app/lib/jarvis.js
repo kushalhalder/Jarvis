@@ -78,7 +78,7 @@ Jarvis.analyze = function(data) {
 Jarvis.say = function(message) {
     if(this.channel)
         this.channel.send("" + message)
-	console.log("Jarvis says: %s", message)
+	console.log("Jarvis said: %s", message)
 }
 
 module.exports = Jarvis
