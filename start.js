@@ -9,7 +9,8 @@
 
 var Slack = require("slack-client"),
 	Readline  = require('readline'),
-	mongoose = require('mongoose')
+	mongoose = require('mongoose'),
+	jarvis = require("./app/lib/jarvis")
 
 //var StanfordSimpleNLP = require('node-stanford-simple-nlp');
 
