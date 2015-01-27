@@ -86,7 +86,17 @@ slack.on('message', function(message) {
 				channelController.updateChannel(message.channel, channel.name)
 				messageController.save(text, message.channel, message.user, s)
 			}*/
-			//if(channel.name === "kushalder")
+			if(jarvis.called(text))
+			{
+				jarvis.slack = slack
+				jarvis.message = message
+				jarvis.channel = channel
+
+				// replace ok jarvis
+				var refinedText = text.replace("ok jarvis,", '').replace("ok jarvis", '').trim()
+				console.log(refinedText)
+				jarvis.analyze(refinedText)
+			}
 			/*else
 				respond(slack, channel, user, text)*/
 		}
@@ -153,7 +163,7 @@ rl.on('line', function(line) {
 			break;
 		case "/check":
 			if(rest) {
-				
+				jarvis.analyze(rest)
 			}
 			break;
 		case "/server":

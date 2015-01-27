@@ -15,18 +15,18 @@ actions.who = require("./who");
 actions.what = require("./what");
 
 // Validate, Wrong
-actions.validate = actions.wrong = require("./validate");
+//actions.validate = actions.wrong = require("./validate");
 
 // Watch, Look
-actions.watch = actions.look = require("./watch");
+//actions.watch = actions.look = require("./watch");
 
 // Compile
-actions.compile = actions.compress = require("./compile");
+//actions.compile = actions.compress = require("./compile");
 
 // How
 actions.how = require("./how");
 
-actions.repeat = actions.again = require("./repeat");
+//actions.repeat = actions.again = require("./repeat");
 
 // Export it all out
 // -------------------------------------------------- //

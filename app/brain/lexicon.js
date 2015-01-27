@@ -11,13 +11,13 @@ var lexicon = {}
 
 module.exports = lexicon = {
 
-    nodebot: {
+    jarvis: {
 
         definition: "a robot, it lives to serve.",
 
-        name: "Nodebot",
+        name: "Jarvis",
 
-        'favorite color': "green".green.bold,
+        'favorite color': "green",
 
         birthday: new Date().toString(),
 
