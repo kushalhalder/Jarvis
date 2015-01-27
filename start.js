@@ -9,15 +9,7 @@
 
 var Slack = require("slack-client"),
 	Readline  = require('readline'),
-	Connection = require('./app/lib/ssh_connection'),
-	Response = require('./app/lib/process_message'),
-	Channel = require('./app/models/channel'),
-	channelController = require('./app/controllers/channel'),
-	messageController = require('./app/controllers/message'),
-	trainController = require('./app/controllers/train'),
-	serverController = require('./app/controllers/server'),
-	mongoose = require('mongoose'),
-	speak = require('speakeasy-nlp')
+	mongoose = require('mongoose')
 
 //var StanfordSimpleNLP = require('node-stanford-simple-nlp');
 
@@ -87,12 +79,12 @@ slack.on('message', function(message) {
 				//var arr = Object.keys(result).map(function(k) { return result[k] });
 
 			});*/
-			var s = sentiment(text)
+			//var s = sentiment(text)
 			
-			if(channel.is_channel) {
+			/*if(channel.is_channel) {
 				channelController.updateChannel(message.channel, channel.name)
 				messageController.save(text, message.channel, message.user, s)
-			}
+			}*/
 			//if(channel.name === "kushalder")
 			/*else
 				respond(slack, channel, user, text)*/
@@ -160,8 +152,7 @@ rl.on('line', function(line) {
 			break;
 		case "/check":
 			if(rest) {
-				console.log(speak.classify(rest))
-				console.log(speak.sentiment.analyze(rest))
+				
 			}
 			break;
 		case "/server":
@@ -235,17 +226,7 @@ function recognizeMessage(message)
 			}
 }
 
-function getAllMethods(object)
-{
-	//return Object.getOwnPropertyNames(object)
-	for(var m in object)
-	{
-		if (typeof object[m] == "function" && object.hasOwnProperty(m)) 
-			console.log(object[m])
-	}
-}
-
-function respond(slack, channel, user, text)
+/*function respond(slack, channel, user, text)
 {
 	// Respond to messages.
 	var response = '';
@@ -299,7 +280,7 @@ function respond(slack, channel, user, text)
 				break;
 		}
 
-}
+}*/
 
 
 slack.login();
