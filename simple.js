@@ -17,8 +17,7 @@ var Slack = require("slack-client"),
 	trainController = require('./app/controllers/train'),
 	serverController = require('./app/controllers/server'),
 	mongoose = require('mongoose'),
-	sentiment = require('sentiment'),
-	natural = require("natural")
+	speak = require('speakeasy-nlp')
 
 //var StanfordSimpleNLP = require('node-stanford-simple-nlp');
 
@@ -28,9 +27,6 @@ var token = 'xoxb-3331946942-OSJpK3TXN3HtrcYFBcKOPXqL',
 
 var slack = new Slack(token, autoReconnect, autoMark);
 var rl = Readline.createInterface(process.stdin, process.stdout);
-
-var classifier = new natural.BayesClassifier()
-var train = null
 
 mongoose.connect('mongodb://localhost:27017/slack')
 
@@ -62,8 +58,6 @@ slack.on('open', function() {
 	console.log('You are in: %s', channels.join(', '));
 	console.log('As well as: %s', groups.join(', '));
 	console.log('You have %s unread ' + (unreads === 1 ? 'message' : 'messages'), unreads);
-	train = new Response(classifier)
-	train.trainAll()
 });
 
 slack.on('message', function(message) {
@@ -100,7 +94,6 @@ slack.on('message', function(message) {
 				messageController.save(text, message.channel, message.user, s)
 			}
 			//if(channel.name === "kushalder")
-				train.reply(slack, channel, user, text)
 			/*else
 				respond(slack, channel, user, text)*/
 		}
@@ -165,22 +158,10 @@ rl.on('line', function(line) {
 				console.log("Need a channel name to leave");
 			}
 			break;
-		case "/train":
-			if(rest) {
-				var part = rest.split(' ', 1),
-					stem = part[0],
-					string = rest.replace(part, '').trim();
-				trainController.save(string, stem)
-				train.train(string, stem)
-				console.log("Trained %s for %s", string, stem)
-			}
-			break;
-		case "/trainData":			
-			train.trainAll()
-			break;
 		case "/check":
 			if(rest) {
-				train.output(rest)
+				console.log(speak.classify(rest))
+				console.log(speak.sentiment.analyze(rest))
 			}
 			break;
 		case "/server":
