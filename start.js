@@ -19,6 +19,7 @@ var token = 'xoxb-3331946942-OSJpK3TXN3HtrcYFBcKOPXqL',
     autoMark = true;
 
 var slack = new Slack(token, autoReconnect, autoMark);
+//var slack = null
 var rl = Readline.createInterface(process.stdin, process.stdout);
 
 mongoose.connect('mongodb://localhost:27017/slack')
@@ -67,8 +68,8 @@ slack.on('message', function(message) {
 		{
 			/*if(twss.prob(text) > 0.99 && user.name != "kushalder" && (channel.name == "playground" || channel.name == "random"))
 				channel.send("@" + user.name + " that's what she said!")
-			else*/
-			/*stanfordSimpleNLP.process(text, function(err, result) {
+			else
+			stanfordSimpleNLP.process(text, function(err, result) {
 				if (err) throw err
 				console.log(result.document.sentences)
 				console.log(result.document.sentences.sentence.tokens.token)
@@ -79,7 +80,7 @@ slack.on('message', function(message) {
 				//console.log(typeof result)
 				//var arr = Object.keys(result).map(function(k) { return result[k] });
 
-			});*/
+			});
 			//var s = sentiment(text)
 
 			/*if(channel.is_channel) {
@@ -92,10 +93,9 @@ slack.on('message', function(message) {
 				jarvis.message = message
 				jarvis.channel = channel
 
-				// replace ok jarvis
-				var refinedText = text.replace("ok jarvis,", '').replace("ok jarvis", '').trim()
-				console.log(refinedText)
-				jarvis.analyze(refinedText)
+                jarvis.getMessage(text, function(text) {
+    				jarvis.analyze(text)
+                })
 			}
 			/*else
 				respond(slack, channel, user, text)*/

@@ -14,32 +14,21 @@ module.exports = lexicon = {
     jarvis: {
 
         definition: "a robot, it lives to serve.",
-
         name: "Jarvis",
-
         'favorite color': "green",
-
         birthday: new Date().toString(),
-
         time : function() {
             return new Date().toString();
         }
     },
 
     user: {
-
         name                : "Master",
-
         definition          : "my master.",
-        
         "current directory" : home,
-        
         "operating system"  : system,
-        
         "host name"         : os.hostname(),
-
         "free memory"       : (os.freemem() / 1000000) + "MB",
-        
         'ip address'        : function() {
 
             var os        = require('os')
@@ -63,7 +52,7 @@ module.exports = lexicon = {
         'ip addresses' : function() {
             return self.lexicon.user['ip address']();
         }
-        
+
     },
 
     'up' : {
@@ -76,7 +65,7 @@ module.exports = lexicon = {
     // ---------- //
 
     "current directory" : {
-        definition: home        
+        definition: home
     },
 
     "operating system" : {
@@ -116,26 +105,26 @@ module.exports = lexicon = {
     "css": {
         definition           : "The great beautifier of the internet",
         "regular expression" : /\.css$/,
-        mime                 : ".css"     
+        mime                 : ".css"
     },
 
     "sass": {
         definition           : "Syntaxually awesome stylesheets",
         "regular expression" : /\.sass$/,
-        mime                 : ".sass"     
+        mime                 : ".sass"
     },
 
     "scss": {
         definition           : "Syntaxually awesome stylesheets",
         "regular expression" : /\.scss$/,
-        mime                 : ".scss"     
+        mime                 : ".scss"
     },
 
     "html": {
         definition           : "The great information organizer of the internet",
         "regular expression" : /\.html$/,
-        mime                 : ".html"     
+        mime                 : ".html"
     }
-    
+
 };
 

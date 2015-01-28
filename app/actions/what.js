@@ -1,10 +1,10 @@
 // What.js
-// "What is your name?", 
+// "What is your name?",
 // "What is the capital of Spain?"
 // -------------------------------------------------- //
 
-var lang       = require("../brain/language"),   
-    request    = require("request"),   
+var lang       = require("../brain/language"),
+    request    = require("request"),
     format     = require("../brain/formatter")
 
 
@@ -12,41 +12,39 @@ module.exports = function what (a) {
 
     if (a.owner === a.subject) a.subject = "definition";
 
-    var jarvis   = this
-    ,   owner     = a.owner
-    ,   subject   = a.subject || "definition"
+    var jarvis   = this,
+        owner     = a.owner,
+        subject   = a.subject || "definition",
+        base      = (owner) ? jarvis.lexicon[owner] : jarvis.lexicon,
+        term      = (subject && base) ? base[subject] : undefined
 
-    ,   base      = (owner) ? jarvis.lexicon[owner] : jarvis.lexicon
-    ,   term      = (subject && base) ? base[subject] : undefined
-    ;
-    
     // Just some more bullet proofing for the subject
-    subject = (owner === subject) ? "definition" : subject;
+    subject = (owner === subject) ? "definition" : subject
 
     // If the term is a function, call it to determin the value
     if (typeof term === "function") term = term().toString();
-    
+
     // Do we have a definition for this subject?
     // -------------------------------------------------- //
 
     if (term) {
-        
+
         switch (subject) {
-            
+
         case "definition":
             jarvis.say(lang.capitalize(owner) + " is " + term);
             break;
         default:
             jarvis.say(lang.possessify(lang.capitalize(owner)) + " " + subject + " is " + term.toString());
         }
-        
+
         return
 
     }
 
 
     // No, search WolframAlpha
-    // 
+    //
     // For more information visit:
     // http://www.wolframalpha.com/termsofuse.html#attributionandlicensing
     // -------------------------------------------------- //
@@ -79,9 +77,9 @@ module.exports = function what (a) {
 
             // commence sending message
             jarvis.say("*Here is what I found...*")
-            
+
             var message = "```"
-            
+
             for(var a=0; a<result.queryresult.pod.length; a++)
             {
                 var pod = result.queryresult.pod[a];
