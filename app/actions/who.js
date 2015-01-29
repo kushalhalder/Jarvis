@@ -12,9 +12,9 @@ module.exports = function who(a) {
     // Special instances
     // -------------------------------------------------- //
     switch(owner){
-        
+
         case "jarvis":
-            
+
             if (this.lexicon.jarvis[key])
                 this.say("My " + key + " is " + this.lexicon.jarvis[key])
             else
@@ -30,19 +30,29 @@ module.exports = function who(a) {
                 this.say("Hmm... I can't remember, " + this.lexicon.user.name)
 
             return
+
+        default:
+            if(this.lexicon.jarvis[key])
+            {
+                this.say(this.lexicon.jarvis[key])
+                console.log("memory")
+            }
+            else {
+                // Typical cases
+                // -------------------------------------------------- //
+
+
+                    var wolframClient = require("../lib/wolfram"),
+                        query = a.tokens.join(" ")
+
+                    wolframClient.query(query, jarvis)
+            }
+            return
     }
 
 
-    // Typical cases
-    // -------------------------------------------------- //
-    
-    if (jarvis.lexicon[owner] !== undefined) {
-        this.say(lang.capitalize(owner) + " is " + this.lexicon[owner][key])
-        return
-    }
 
-    
     return jarvis.actions.what.apply(jarvis, [a]);
-    
+
 
 };

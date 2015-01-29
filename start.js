@@ -87,6 +87,9 @@ slack.on('message', function(message) {
 				channelController.updateChannel(message.channel, channel.name)
 				messageController.save(text, message.channel, message.user, s)
 			}*/
+            if (text.trim() == "didi") {
+                channel.send("<@U039UMNAG>, <@" + message.user + "> is calling you!")
+            }
 			if(jarvis.called(text))
 			{
 				jarvis.slack = slack

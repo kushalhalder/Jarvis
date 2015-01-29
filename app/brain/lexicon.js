@@ -15,6 +15,8 @@ module.exports = lexicon = {
 
         definition: "a robot, it lives to serve.",
         name: "Jarvis",
+        Jarvis: "Me.",
+        jarvis: "Me.",
         'favorite color': "green",
         birthday: new Date().toString(),
         time : function() {

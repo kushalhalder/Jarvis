@@ -30,75 +30,18 @@ module.exports = function what (a) {
     if (term) {
 
         switch (subject) {
-
-        case "definition":
-            jarvis.say(lang.capitalize(owner) + " is " + term);
-            break;
-        default:
-            jarvis.say(lang.possessify(lang.capitalize(owner)) + " " + subject + " is " + term.toString());
-        }
-
+            case "definition":
+                jarvis.say(lang.capitalize(owner) + " is " + term);
+                break;
+            default:
+                jarvis.say(lang.possessify(lang.capitalize(owner)) + " " + subject + " is " + term.toString());
+            }
         return
-
     }
 
-
     // No, search WolframAlpha
-    //
-    // For more information visit:
-    // http://www.wolframalpha.com/termsofuse.html#attributionandlicensing
-    // -------------------------------------------------- //
+    var wolframClient = require("../lib/wolfram"),
+        query = a.tokens.join(" ")
 
-    var app_id = "PQ5RE9-79H3KEYL6V";
-
-    var qs = require('querystring')
-    ,   sax    = require("sax")
-    ,   strict = true
-    ,   parser = sax.parser(strict)
-    ,   request = require("request")
-    ,   data = qs.stringify({ input: a.tokens.join(" ") })
-    ;
-
-    jarvis.say("Hmm, I don't know off the top of my head. Let me ask around...");
-
-    var Client = require('node-wolfram');
-    var Wolfram = new Client(app_id);
-    Wolfram.query(a.tokens.join(" "), function(err, result) {
-
-        if(err)
-            console.log(err);
-        else
-        {
-            if(!result.queryresult.pod)
-            {
-                jarvis.say("Sorry! Couldn't find anything :sad:")
-                return
-            }
-
-            // commence sending message
-            jarvis.say("*Here is what I found...*")
-
-            var message = "```"
-
-            for(var a=0; a<result.queryresult.pod.length; a++)
-            {
-                var pod = result.queryresult.pod[a];
-                message += pod.$.title + ": "
-                for(var b=0; b<pod.subpod.length; b++)
-                {
-                    var subpod = pod.subpod[b];
-                    for(var c=0; c<subpod.plaintext.length; c++)
-                    {
-                        var text = subpod.plaintext[c];
-                        message += text
-                    }
-                }
-
-                message += "\n"
-            }
-
-            jarvis.say(message + "```")
-        }
-    });
-
+    //wolframClient.query(query, jarvis)
 };

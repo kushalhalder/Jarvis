@@ -31,8 +31,7 @@ Jarvis.analyze = function(data) {
 	var lang = require("../brain/language")
 
     var a = lang.classify(data)
-    console.log(a)
-	// let's filter the ownership
+    // let's filter the ownership
     switch(a.owner) {
 
         // Reverse user possession
@@ -49,10 +48,12 @@ Jarvis.analyze = function(data) {
         // recorded context
         case "it": case "its": case "they": case "their":
         case "he": case "she": case "his": case "hers":
-        default:
-            a.owner = "jarvis"
-            break
+        break;
+        /*default:
+            a.owner = ""
+            break*/
     }
+    console.log(a)
 
     // If there is no action, but the owner is the user or the robot, it
     // is a relabeling
