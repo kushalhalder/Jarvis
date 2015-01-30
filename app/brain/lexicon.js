@@ -17,7 +17,7 @@ module.exports = lexicon = {
         name: "Jarvis",
         Jarvis: "Me.",
         jarvis: "Me.",
-        'favorite color': "green",
+        'favorite color': "blue",
         birthday: new Date().toString(),
         time : function() {
             return new Date().toString();

@@ -12,9 +12,7 @@ module.exports = function who(a) {
     // Special instances
     // -------------------------------------------------- //
     switch(owner){
-
         case "jarvis":
-
             if (this.lexicon.jarvis[key])
                 this.say("My " + key + " is " + this.lexicon.jarvis[key])
             else
@@ -23,7 +21,6 @@ module.exports = function who(a) {
             return
 
         case "user":
-
             if (this.lexicon.user[key])
                 this.say("You are my master, " + this.lexicon.user.name)
             else
@@ -41,18 +38,12 @@ module.exports = function who(a) {
                 // Typical cases
                 // -------------------------------------------------- //
 
+                var wolframClient = require("../lib/wolfram"),
+                    query = a.tokens.join(" ")
 
-                    var wolframClient = require("../lib/wolfram"),
-                        query = a.tokens.join(" ")
-
-                    wolframClient.query(query, jarvis)
+                wolframClient.query(query, jarvis)
             }
             return
     }
-
-
-
     return jarvis.actions.what.apply(jarvis, [a]);
-
-
 };

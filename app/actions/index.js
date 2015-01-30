@@ -1,5 +1,5 @@
 // Actions
-// 
+//
 // Tells the nodebot how to do a command
 // -------------------------------------------------- //
 
@@ -27,6 +27,9 @@ actions.what = require("./what");
 actions.how = require("./how");
 
 //actions.repeat = actions.again = require("./repeat");
+
+// Pull
+actions.pull = require("./pull")
 
 // Export it all out
 // -------------------------------------------------- //
