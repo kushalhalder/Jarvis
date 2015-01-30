@@ -300,4 +300,4 @@ function recognizeMessage(message)
 }*/
 
 
-slack.login();
+//slack.login();

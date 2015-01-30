@@ -1,5 +1,6 @@
 var Jarvis = {}
 
+// short term memory
 Jarvis.memory = {
 	tasks: [],
 	context: "jarvis"
