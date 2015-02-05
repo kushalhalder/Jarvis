@@ -1,7 +1,8 @@
 // Server Pull
 // "Pull logos on <country>"
 
-var lang = require("../brain/language")
+var lang = require("../brain/language"),
+    Connection = require("../lib/ssh_connection")
 
 module.exports = function pull(a) {
     var jarvis = this,
@@ -15,16 +16,15 @@ module.exports = function pull(a) {
     if (index > -1) {
         nouns.splice(index, 1);
     }
-
+    conn = new Connection()
+    // perform a synchronous pull
     if(nouns.length > 1)
-    {
-        console.log("Do you want me to pull on ")
-        this.memory.tasks.push(a)
-        this.memory.context = a.ownership
+        jarvis.say("Synchronously pulling on all the repos.")
+    for (var i = nouns.length - 1; i >= 0; i--) {
+        var repo = nouns[i]
+        jarvis.say("Pulling on " + repo)
+        conn.pull_request(jarvis.channel, repo, country)
     }
-    else
-    {
-        // pull on the repo
-        console.log("Asked to pull at repo:%s on country:%s", nouns.join(" "), country)
-    }
+
+    return
 }

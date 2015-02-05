@@ -18,7 +18,7 @@ var token = 'xoxb-3331946942-OSJpK3TXN3HtrcYFBcKOPXqL',
     autoReconnect = true,
     autoMark = true;
 
-var slack = new Slack(token, autoReconnect, autoMark);
+var slack = jarvis.slack = new Slack(token, autoReconnect, autoMark);
 //var slack = null
 var rl = Readline.createInterface(process.stdin, process.stdout);
 
@@ -59,43 +59,25 @@ slack.on('message', function(message) {
         channel = slack.getChannelGroupOrDMByID(message.channel),
         user = slack.getUserByID(message.user),
         time = message.ts,
-        text = message.text;
+        text = message.text
 
     console.log('Received: %s %s %s %s "%s"', type, (channel.is_channel ? '#' : '') + channel.name, user ? "@"+user.name : '', time, text);
-
     if(type === "message")
+    {
         if(text)
         {
-            /*if(twss.prob(text) > 0.99 && user.name != "kushalder" && (channel.name == "playground" || channel.name == "random"))
-                channel.send("@" + user.name + " that's what she said!")
-            else
-            stanfordSimpleNLP.process(text, function(err, result) {
-                if (err) throw err
-                console.log(result.document.sentences)
-                console.log(result.document.sentences.sentence.tokens.token)
-                console.log(result.document.sentences.sentence.parse)
-                console.log(result.document.sentences.sentence.dependencies)
-                console.log(result.document.sentences.sentence.parsedTree.children)
-                //JSON.stringify(result)
-                //console.log(typeof result)
-                //var arr = Object.keys(result).map(function(k) { return result[k] });
-
-            });
-            //var s = sentiment(text)
-
             /*if(channel.is_channel) {
                 channelController.updateChannel(message.channel, channel.name)
                 messageController.save(text, message.channel, message.user, s)
             }*/
-            if (text.trim() == "didi") {
-                channel.send("<@U039UMNAG>, <@" + message.user + "> is calling you!")
-            }
+            var bc = bakchodi(message)
+            if(bc[0])
+                channel.send(bc[1])
+
             if(jarvis.called(text))
             {
-                jarvis.slack = slack
                 jarvis.message = message
                 jarvis.channel = channel
-
                 jarvis.getMessage(text, function(text) {
                     jarvis.analyze(text)
                 })
@@ -103,7 +85,8 @@ slack.on('message', function(message) {
             /*else
                 respond(slack, channel, user, text)*/
         }
-});
+    }
+})
 
 slack.on('error', function(error) {
     console.error('Error: %s', error);
@@ -189,6 +172,22 @@ rl.on('line', function(line) {
     return rl.prompt();
 });
 
+function bakchodi(message)
+{
+    re = /(didi)/i
+    m = message.text.match(re)
+
+    if(m)
+        return [true, "<@U039UMNAG>, <@" + message.user + "> is calling you!"]
+
+    re = /(bogo)/i
+    m = message.text.match(re)
+
+    if(m)
+        return [true, "<@U039T43PK>, <@" + message.user + "> is calling you!"]
+
+    return [false]
+}
 function recognizeMessage(message)
 {
     re = /(.*?)(\@U039RTUTQ)(.*)/;
@@ -300,4 +299,4 @@ function recognizeMessage(message)
 }*/
 
 
-//slack.login();
+slack.login();

@@ -43,5 +43,5 @@ module.exports = function what (a) {
     var wolframClient = require("../lib/wolfram"),
         query = a.tokens.join(" ")
 
-    //wolframClient.query(query, jarvis)
+    wolframClient.query(query, jarvis)
 };
