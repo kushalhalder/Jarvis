@@ -24,7 +24,8 @@
     "speakeasy-nlp" : "latest",
     "request": "latest",
     "sax": "latest",
-    "ssh2": "latest"
+    "ssh2": "latest",
+    "node-wolfram": "latest"
   },
   "engines": {
     "node": ">= 0.8.x",
