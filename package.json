@@ -20,7 +20,6 @@
     "mongoose": "latest",
     "readline": "latest",
     "twss": "latest",
-    "stanford-simple-nlp" : "latest",
     "natural" : "latest",
     "speakeasy-nlp" : "latest",
     "request": "latest",
