@@ -18,6 +18,11 @@ Jarvis.language = require("../brain/language")
 // actions that Jarvis can do
 Jarvis.actions = require("../actions")
 
+// start jarvis
+Jarvis.wakeup = function() {
+    this.slack.login()
+}
+
 // check when jarvis has been called
 Jarvis.called = function(message) {
     re = /(.*?)(ok jarvis)(.*)/;
@@ -141,6 +146,18 @@ Jarvis.reply = function(message) {
                 respond(slack, channel, user, text)*/
         }
     }
+}
+
+Jarvis.watchDB = function(slack, mongoUrl, collName, channelName) {
+    var mongoPubSub = require("./mongonotif"),
+        mongo = require("mongodb"),
+        channelName = "tech",
+        otherChannel = slack.getChannelGroupOrDMByName(channelName)
+
+    mongo.MongoClient.connect(mongoUrl, function(err, db) {
+        mongoPubSub.connect(db, collName, otherChannel)
+    })
+
 }
 
 module.exports = Jarvis

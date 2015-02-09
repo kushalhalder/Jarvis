@@ -25,7 +25,8 @@
     "request": "latest",
     "sax": "latest",
     "ssh2": "latest",
-    "node-wolfram": "latest"
+    "node-wolfram": "latest",
+    "mongodb": "latest"
   },
   "engines": {
     "node": ">= 0.8.x",
