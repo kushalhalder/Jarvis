@@ -10,11 +10,12 @@
 var Slack = require("slack-client"),
     Readline  = require('readline'),
     mongoose = require('mongoose'),
-    jarvis = require("./app/lib/jarvis")
+    jarvis = require("./app/lib/jarvis"),
+    config = require("./assets/config")
 
 //var StanfordSimpleNLP = require('node-stanford-simple-nlp');
 
-var token = 'xoxb-3331946942-OSJpK3TXN3HtrcYFBcKOPXqL',
+var token = config.token,
     autoReconnect = true,
     autoMark = true;
 

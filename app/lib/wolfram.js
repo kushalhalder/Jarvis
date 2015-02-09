@@ -1,6 +1,7 @@
+var config = require("../../assets/config")
 var WolframClient = {}
 
-WolframClient.app_id = "PQ5RE9-79H3KEYL6V"
+WolframClient.app_id = config.wolfram_app_id
 
 WolframClient.query = function(query, jarvis) {
     jarvis.say("Hmm, I don't know off the top of my head. Let me ask around...")

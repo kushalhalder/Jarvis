@@ -15,8 +15,9 @@ MongoNotif.connect = function (db, collName, channel) {
             console.log ("Success connecting to %s", collName)
             //self.readAndSend(channel, collection)
             self.listen(collection, function(data){
-                console.log("Just wanted to inform you guys that memcache is failing. Take some action asap. The exception from the server says *%s*",data.exception)
-                //channel.send("Just wanted to inform you guys that memcache is failing. Take some action asap. The exception from the server says *" + data.exception + "*")
+                var response = "Just wanted to inform that *" +collName+ "* is failing. The exception from the server says *" + data.exception + "*"
+                console.log(response)
+                //channel.send(response)
             })
         });
     });
