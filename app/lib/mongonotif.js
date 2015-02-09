@@ -17,7 +17,7 @@ MongoNotif.connect = function (db, collName, channel) {
             self.listen(collection, function(data){
                 var response = "Just wanted to inform that *" +collName+ "* is failing. The exception from the server says *" + data.exception + "*"
                 console.log(response)
-                //channel.send(response)
+                channel.send(response)
             })
         });
     });

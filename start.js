@@ -9,9 +9,9 @@
 
 var Slack = require("slack-client"),
     Readline  = require('readline'),
-    mongoose = require('mongoose'),
     jarvis = require("./app/lib/jarvis"),
-    config = require("./assets/config")
+    config = require("./assets/config"),
+    mongoose = require("mongoose")
 
 //var StanfordSimpleNLP = require('node-stanford-simple-nlp');
 
@@ -24,10 +24,6 @@ var slack = jarvis.slack = new Slack(token, autoReconnect, autoMark);
 var rl = Readline.createInterface(process.stdin, process.stdout);
 
 mongoose.connect('mongodb://localhost:27017/slack')
-
-/*var stanfordSimpleNLP = new StanfordSimpleNLP.StanfordSimpleNLP();
-stanfordSimpleNLP.loadPipelineSync();*/
-
 
 slack.on('open', function() {
 
@@ -53,7 +49,7 @@ slack.on('open', function() {
     console.log('You are in: %s', channels.join(', '));
     console.log('As well as: %s', groups.join(', '));
     console.log('You have %s unread ' + (unreads === 1 ? 'message' : 'messages'), unreads);
-    jarvis.watchDB(slack, "mongodb://localhost:27017/messages", "memcache", "tech")
+    jarvis.watchDB(slack, config.memcache_mongo, "memcache", "tech")
 });
 
 slack.on('message', function(message) {
@@ -68,10 +64,6 @@ slack.on('message', function(message) {
     {
         if(text)
         {
-            /*if(channel.is_channel) {
-                channelController.updateChannel(message.channel, channel.name)
-                messageController.save(text, message.channel, message.user, s)
-            }*/
             var bc = bakchodi(message)
             if(bc[0])
                 channel.send(bc[1])
@@ -84,8 +76,6 @@ slack.on('message', function(message) {
                     jarvis.analyze(text)
                 })
             }
-            /*else
-                respond(slack, channel, user, text)*/
         }
     }
 })
@@ -243,62 +233,5 @@ function recognizeMessage(message)
                     return ["stagingBrnachRequest"]
             }
 }
-
-/*function respond(slack, channel, user, text)
-{
-    // Respond to messages.
-    var response = '';
-
-    var reply = recognizeMessage(text);
-
-    if(reply)
-        switch (reply[0]) {
-            case "mention":
-                var mentionedUser = slack.getUserByID(reply[1])
-                if(mentionedUser)
-                    if(mentionedUser.name === "kushalder" && mentionedUser.presence == "away")
-                    {
-                        response = "Hi @" + user.name + ". Mr. Halder is not available right now. I will make sure that he gets your message.";
-                        channel.send(response);
-                        console.log("%s has been mentioned.", user.name);
-                    }
-                break;
-            case "mentionJarvis":
-                var m = text.match(/(.*?)(@U039RTUTQ)(.*)/)
-                if(m)
-                    if(m[3])
-                        respond(slack, channel, user, m[3])
-                break;
-            case "whoami":
-                response = "I am Mr. Halder's assistant."
-                channel.send(response);
-                console.log("Jarvis has been called by %s.", channel.name)
-                break;
-            case "pullRequest":
-                var m = text.match(/(.*?)(git pull on) (.*)/)
-
-                if(m) {
-                    if(m[3]) {
-                        var conn = new Connection();
-                        conn.pull_request(channel, m[3])
-                        response = "You have asked me to do a pull on " + m[3];
-                        channel.send(response)
-                        console.log("Jarvis has been asked to pull on %s", m[3])
-                    }
-                    else {
-                        channel.send("Mention a repo please.");
-                    }
-                }
-                else {
-                    channel.send("Mention a repo please.");
-                }
-                break;
-            case "stagingBranchRequest":
-
-                break;
-        }
-
-}*/
-
 
 jarvis.wakeup()
