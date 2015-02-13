@@ -49,7 +49,7 @@ slack.on('open', function() {
     console.log('You are in: %s', channels.join(', '));
     console.log('As well as: %s', groups.join(', '));
     console.log('You have %s unread ' + (unreads === 1 ? 'message' : 'messages'), unreads);
-    jarvis.watchDB(slack, config.memcache_mongo, "memcache", "tech")
+    jarvis.watchDB(slack, config.memcache_mongo, "memcache", "cd-status")
 });
 
 slack.on('message', function(message) {

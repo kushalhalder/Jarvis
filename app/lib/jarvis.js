@@ -151,7 +151,6 @@ Jarvis.reply = function(message) {
 Jarvis.watchDB = function(slack, mongoUrl, collName, channelName) {
     var mongoPubSub = require("./mongonotif"),
         mongo = require("mongodb"),
-        channelName = "tech",
         otherChannel = slack.getChannelGroupOrDMByName(channelName)
 
     mongo.MongoClient.connect(mongoUrl, function(err, db) {
