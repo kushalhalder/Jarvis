@@ -1,6 +1,6 @@
 {
   "name": "slack-bot",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A Slack bot",
   "main": "./start",
   "scripts": {
@@ -26,10 +26,10 @@
     "sax": "latest",
     "ssh2": "latest",
     "node-wolfram": "latest",
-    "mongodb": "latest"
+    "mongodb": "latest",
+    "socket.io": "latest",
+    "express": "latest",
+    "jade": "latest"
   },
-  "engines": {
-    "node": ">= 0.8.x",
-    "npm": ">= 1.1.x"
-  }
+  "author": "Kushal Halder"
 }

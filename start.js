@@ -11,7 +11,10 @@ var Slack = require("slack-client"),
     Readline  = require('readline'),
     jarvis = require("./app/lib/jarvis"),
     config = require("./assets/config"),
-    mongoose = require("mongoose")
+    mongoose = require("mongoose"),
+    express = require("express"),
+    app = express(),
+    port = 3700
 
 //var StanfordSimpleNLP = require('node-stanford-simple-nlp');
 
@@ -45,11 +48,11 @@ slack.on('open', function() {
         }
     }
 
-    console.log('Welcome to Slack. You are @%s of %s', slack.self.name, slack.team.name);
-    console.log('You are in: %s', channels.join(', '));
-    console.log('As well as: %s', groups.join(', '));
-    console.log('You have %s unread ' + (unreads === 1 ? 'message' : 'messages'), unreads);
-    jarvis.watchDB(slack, config.memcache_mongo, "memcache", "cd-status")
+    console.log('Welcome to Slack. You are @%s of %s', slack.self.name, slack.team.name)
+    console.log('You are in: %s', channels.join(', '))
+    console.log('As well as: %s', groups.join(', '))
+    console.log('You have %s unread ' + (unreads === 1 ? 'message' : 'messages'), unreads)
+    jarvis.watchDB(slack, config.memcache_mongo, "memcache", "kushalder")
 });
 
 slack.on('message', function(message) {
@@ -233,5 +236,12 @@ function recognizeMessage(message)
                     return ["stagingBrnachRequest"]
             }
 }
+
+app.get("/", function(req, res){
+    res.send("It works!");
+});
+
+app.listen(port);
+console.log("Listening on port " + port);
 
 jarvis.wakeup()
