@@ -1,4 +1,5 @@
-var MongoNotif = {}
+var notifsid = require("../controllers/notifsid.js"),
+    MongoNotif = {}
 
 MongoNotif.connect = function (db, collName, channel) {
     var self = this
@@ -15,7 +16,9 @@ MongoNotif.connect = function (db, collName, channel) {
             console.log ("Success connecting to %s", collName)
             //self.readAndSend(channel, collection)
             self.listen(collection, function(data){
-                var response = "Just wanted to inform that *" +collName+ "* is failing. The exception from the server says *" + data.exception + "*"
+                //var response = "Just wanted to inform that *" +collName+ "* is failing. The exception from the server says *" + data._id + "*"
+                var response = data._id
+                //notifsid.updateColl(data._id, collName);
                 console.log(response)
                 channel.send(response)
             })
@@ -24,6 +27,7 @@ MongoNotif.connect = function (db, collName, channel) {
 }
 
 MongoNotif.listen = function(coll, callback) {
+    console.log("Started listening to logs")
     //coll = db.collection(collName)
     conditions = {}
     latestCursor = coll.find(conditions).sort({$natural: -1}).limit(1)
@@ -36,7 +40,7 @@ MongoNotif.listen = function(coll, callback) {
             await_data: true,
             numberOfRetries: -1
         }
-        stream = coll.find(conditions, options).sort({$natural: -1}).stream()
+        stream = coll.find(conditions, options).stream()
         stream.on('data', callback)
     })
 }

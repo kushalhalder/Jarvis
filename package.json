@@ -13,9 +13,7 @@
   ],
   "author": "Kushal Halder",
   "dependencies": {
-    "coffee-script": "1.6.3",
-    "ws": "0.4.31",
-    "log": "1.4.0",
+    "ws": "latest",
     "slack-client" : "latest",
     "mongoose": "latest",
     "readline": "latest",

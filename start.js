@@ -52,7 +52,7 @@ slack.on('open', function() {
     console.log('You are in: %s', channels.join(', '))
     console.log('As well as: %s', groups.join(', '))
     console.log('You have %s unread ' + (unreads === 1 ? 'message' : 'messages'), unreads)
-    jarvis.watchDB(slack, config.memcache_mongo, "memcache", "kushalder")
+    //jarvis.watchDB(slack, config.memcache_test, "log", "monitor")
 });
 
 slack.on('message', function(message) {
@@ -237,11 +237,11 @@ function recognizeMessage(message)
             }
 }
 
-app.get("/", function(req, res){
+/*app.get("/", function(req, res){
     res.send("It works!");
 });
 
 app.listen(port);
-console.log("Listening on port " + port);
+console.log("Listening on port " + port);*/
 
 jarvis.wakeup()
