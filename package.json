@@ -27,7 +27,8 @@
     "mongodb": "latest",
     "socket.io": "latest",
     "express": "latest",
-    "jade": "latest"
+    "jade": "latest",
+    "tail": "latest"
   },
   "author": "Kushal Halder"
 }

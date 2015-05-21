@@ -159,4 +159,15 @@ Jarvis.watchDB = function(slack, mongoUrl, collName, channelName) {
 
 }
 
+Jarvis.watchFile = function(channel, filePath) {
+    Tail = require('tail').Tail;
+
+    tail = new Tail(filePath);
+
+    tail.on("line", function(reponse) {
+        console.log(response)
+        channel.send(response)
+    });
+}
+
 module.exports = Jarvis

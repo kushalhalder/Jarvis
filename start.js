@@ -53,6 +53,10 @@ slack.on('open', function() {
     console.log('As well as: %s', groups.join(', '))
     console.log('You have %s unread ' + (unreads === 1 ? 'message' : 'messages'), unreads)
     //jarvis.watchDB(slack, config.memcache_test, "log", "monitor")
+
+    var monitor = slack.getChannelGroupOrDMByName("monitor")
+    jarvis.watchFile(monitor, "/data/code_base/pharmeasy/backend/runtime/logs/app.log")
+    jarvis.watchFile(monitor, "/data/code_base/pharmeasy/api/runtime/logs/app.log")
 });
 
 slack.on('message', function(message) {
