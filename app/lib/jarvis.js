@@ -164,7 +164,7 @@ Jarvis.watchFile = function(channel, filePath) {
 
     tail = new Tail(filePath);
 
-    tail.on("line", function(reponse) {
+    tail.on("line", function(response) {
         console.log(response)
         channel.send(response)
     });
