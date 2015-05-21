@@ -55,8 +55,8 @@ slack.on('open', function() {
     //jarvis.watchDB(slack, config.memcache_test, "log", "monitor")
 
     var monitor = slack.getChannelGroupOrDMByName("monitor")
-    jarvis.watchFile(monitor, "/data/code_base/pharmeasy/backend/runtime/logs/app.log")
-    jarvis.watchFile(monitor, "/data/code_base/pharmeasy/api/runtime/logs/app.log")
+    jarvis.watchFile(monitor, "/data/code_base/pharmaeasy/backend/runtime/logs/app.log")
+    jarvis.watchFile(monitor, "/data/code_base/pharmaeasy/api/runtime/logs/app.log")
 });
 
 slack.on('message', function(message) {
