@@ -165,10 +165,10 @@ Jarvis.watchFile = function(channel, filePath) {
     tail = new Tail(filePath);
 
     tail.on("line", function(response) {
-        setTimeout(function(){
-            console.log(response)
-            channel.send(response)
-        },500)
+        console.log(response)
+        /*setTimeout(function(){
+            //channel.send(response)
+        },500)*/
     });
 }
 
