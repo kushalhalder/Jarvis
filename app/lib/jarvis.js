@@ -125,14 +125,9 @@ Jarvis.reply = function(message) {
     {
         if(text)
         {
-
-
-            /*if(channel.is_channel) {
+            if(channel.is_channel) {
                 channelController.updateChannel(message.channel, channel.name)
                 messageController.save(text, message.channel, message.user, s)
-            }*/
-            if (text.trim() == "didi") {
-                channel.send("<@U039UMNAG>, <@" + message.user + "> is calling you!")
             }
             if(jarvis.called(text))
             {
@@ -142,8 +137,8 @@ Jarvis.reply = function(message) {
                     jarvis.analyze(text)
                 })
             }
-            /*else
-                respond(slack, channel, user, text)*/
+            else
+                respond(slack, channel, user, text)
         }
     }
 }
@@ -170,6 +165,10 @@ Jarvis.watchFile = function(channel, filePath) {
             //channel.send(response)
         },500)*/
     });
+}
+
+Jarvis.agenda = function(channel) {
+
 }
 
 module.exports = Jarvis
