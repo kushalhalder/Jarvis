@@ -57,6 +57,7 @@ slack.on('open', function() {
     var monitor = slack.getChannelGroupOrDMByName("monitor")
     jarvis.watchFile(monitor, "/data/code_base/pharmaeasy/backend/runtime/logs/app.log")
     jarvis.watchFile(monitor, "/data/code_base/pharmaeasy/api/runtime/logs/app.log")
+    jarvis.watchFile(monitor, "/data/code_base/pharmaeasy/delivery/runtime/logs/app.log")
 });
 
 slack.on('message', function(message) {
